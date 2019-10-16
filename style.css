@@ -1,0 +1,45 @@
+body {
+  background-color: grey;
+}
+
+.flex-container {
+  display: flex;
+  flex: 1;
+}
+/**/
+.flex-logo {
+  margin-left: 100px;
+  height: 200px;
+  width: 200px;
+}
+.flex-about {
+  margin-left: 50px;
+  height: 200px;
+  width: 600px;
+  margin-right: 100px;
+}
+
+.flex1-container {
+  display: flex;
+  flex: 2;
+  margin-top: 10px;
+}
+.flex2-container {
+  display: flex;
+  flex: 1;
+  margin-top: 5px;
+  margin-left: 100px;
+  height: 260px;
+  width: 100px;
+}
+h1 {
+  display: flex;
+  flex: 1;
+  font-family: sans-serif;
+  color: steelblue;
+}
+
+.flexWeather1 {
+  display: flex;
+  flex: 3;
+}
