@@ -38,30 +38,35 @@ $(() => {
     }
     return carouselImg;
   }
-  function carouselFunction(carouselIndex, highestIndex) {
+  function carouselFunction(numImages) {
     console.log("carousel function");
 
-    //need to be able to construct carousel images then drill down to image
-    //or need to get to a class id that is a number
-    //also doesn't seem to be looping?
-    // this I need to create 1 image per div.  That image has it's own class ie imgDay1
-    //imgDay2.  in this function switch the image for each class.  Maybe keep track of the image
-    //by day so day 1 start with image 1 and day 2 start with image 2 so same image is not ]
-    //on the screen at the same time.
+    const $imageIndx = $(".carousel-image");
+    for (i = 0; i < numImages; i++) {
+      currentImage = $imageIndx[i].src;
+      //get position of .jpg and then decrement by 1 to get the position of the picture number
+      let currentIndex = currentImage.indexOf(".jpg");
+      currentIndex = currentIndex - 1;
+      let stringNum = currentImage.charAt(currentIndex);
+      let pictureNum = parseInt(stringNum);
+      //determine what the next picture number is.  If picture number is 5 then reset to the beginning of carousel at 1
+      let newPictureNum = 1;
+      if (pictureNum == 5) {
+      } else {
+        newPictureNum = pictureNum + 1;
+      }
+      //when image scr retrieved it is coming back with HTTP which is causing
+      //the image to not be found,  Need to strip out everthing prior "weatherImages".
+      console.log("current image " + currentImage);
+      const stripIndex = currentImage.indexOf("weatherImages");
+      console.log("strip index " + stripIndex);
+      const strippedImage = currentImage.substring(stripIndex);
+      console.log("stripped image " + strippedImage);
+      const newImage = strippedImage.replace(pictureNum, newPictureNum);
+      console.log("new image" + newImage);
 
-    const $imageIndx = $(".carousel-image").eq(carouselIndex);
-    console.log($imageIndx);
-    $imageIndx.css("display", "none");
-    // increment image index
-    if (carouselIndex < highestIndex) {
-      carouselIndex++;
-    } else {
-      carouselIndex = 0;
+      $imageIndx.eq(i).attr("src", newImage);
     }
-    // show current image
-    $(".carousel-image")
-      .eq(carouselIndex)
-      .css("display", "block");
   }
   function getWeatherMsg(date, icon, iconPhrase, tempMinValue, tempMaxValue) {
     let blanketMsg = "Who knows! when in doubt...blanket!";
@@ -149,17 +154,11 @@ $(() => {
       //create carousel images approach 2 - create 1 image per div
       //cascading the image number so same image won't appear on different divs if
       //the weather condition changes - carousel will replace image
-
       //////////////////////////////////////////////////
       ////////////////////////////////////////////////////////
     }
-    let carouselIndex = 0;
-    let highestIndex = 4;
-    alert("set interval");
-    // let myvar = setInterval(
-    // carouselFunction(carouselIndex, highestIndex),
-    //   3000
-    // );
+    let numImages = 5;
+    setInterval(() => carouselFunction(numImages), 3000);
   };
 
   ///////to handle data when hardcoded values are used for testing
@@ -173,6 +172,7 @@ $(() => {
   //   "http://dataservice.accuweather.com/forecasts/v1/daily/5day/2439_PC?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ";
   // $.ajax({ url: endpoint }).then(handleData);
 });
+//endpoint data layout
 // "DailyForecasts": [
 //     {
 //       "Date": "2019-10-15T07:00:00-04:00",
@@ -189,55 +189,3 @@ $(() => {
 //           "UnitType": 18
 //         }
 //       },
-//       "Day": {
-//         "Icon": 2,
-//         "IconPhrase": "Mostly sunny",
-//         "HasPrecipitation": false
-//       },
-//       "Night": {
-//         "Icon": 34,
-//         "IconPhrase": "Mostly clear",
-//         "HasPrecipitation": false
-//       },
-//       "Sources": [
-//         "AccuWeather"
-//       ],
-//       "MobileLink": "http://m.accuweather.com/en/us/seymour-ct/06483/daily-weather-forecast/2439_pc?day=1&lang=en-us",
-//       "Link": "http://www.accuweather.com/en/us/seymour-ct/06483/daily-weather-forecast/2439_pc?day=1&lang=en-us"
-//     },
-//     {
-//       "Date": "2019-10-16T07:00:00-04:00",
-//       "EpochDate": 1571223600,
-//       "Temperature": {
-//         "Minimum": {
-//           "Value": 48,
-//           "Unit": "F",
-//           "UnitType": 18
-//         },
-//         "Maximum": {
-//           "Value": 65,
-//           "Unit": "F",
-//           "UnitType": 18
-//         }
-//       },
-//       "Day": {
-//         "Icon": 12,
-//         "IconPhrase": "Showers",
-//         "HasPrecipitation": true,
-//         "PrecipitationType": "Rain",
-//         "PrecipitationIntensity": "Moderate"
-//       },
-//       "Night": {
-//         "Icon": 18,
-//         "IconPhrase": "Rain",
-//         "HasPrecipitation": true,
-//         "PrecipitationType": "Rain",
-//         "PrecipitationIntensity": "Heavy"
-//       },
-//       "Sources": [
-//         "AccuWeather"
-//       ],
-//       "MobileLink": "http://m.accuweather.com/en/us/seymour-ct/06483/daily-weather-forecast/2439_pc?day=2&lang=en-us",
-//       "Link": "http://www.accuweather.com/en/us/seymour-ct/06483/daily-weather-forecast/2439_pc?day=2&lang=en-us"
-//     },
-//     {
