@@ -1,40 +1,45 @@
 $(() => {
   const getWeatherImage = icon => {
     if (icon > 0 && icon < 4) {
-      weatherImage = "weatherImages/sunny.jpg";
+      weatherImage = "weatherImages/sunny/sunny.jpeg";
     } else if (icon >= 4 && icon < 12) {
-      weatherImage = "weatherImages/cloudy.jpg";
+      weatherImage = "weatherImages/cloudy/cloudy.jpg";
     } else if (icon >= 12 && icon < 19) {
       weatherImage = "weatherImages/rainy/rain.jpg";
     } else if (icon >= 19 && icon < 24) {
-      weatherImage = "weatherImages/snow.png";
+      weatherImage = "weatherImages/snow/snow.png";
     } else if (icon >= 24 && icon < 30) {
-      weatherImage = "weatherImages/sleet.jpeg";
-    } else if ((icon = 32)) {
-      weatherImage = "weatherImages/windy.png";
+      weatherImage = "weatherImages/sleet/sleet.jpeg";
+    } else if (icon == 32) {
+      weatherImage = "weatherImages/windy/windy.png";
     } else if (icon >= 30) {
-      weatherImage = "weatherImages/whoKnows.jpeg";
+      weatherImage = "weatherImages/whoKnows/whoKnows.jpeg";
       console.log(icon);
     }
     return weatherImage;
   };
   function getCarouselImg(i, icon) {
     if (icon > 0 && icon < 4) {
-      carouselImg = "weatherImages/sunny.jpg";
+      let iImage = "sunnyDay" + i + ".jpg";
+      carouselImg = "weatherImages/sunny/" + iImage;
     } else if (icon >= 4 && icon < 12) {
-      carouselImg = "weatherImages/cloudy.jpg";
+      let iImage = "cloudyDay" + i + ".jpg";
+      carouselImg = "weatherImages/cloudy/" + iImage;
     } else if (icon >= 12 && icon < 19) {
       let iImage = "rainyDay" + i + ".jpg";
       carouselImg = "weatherImages/rainy/" + iImage;
     } else if (icon >= 19 && icon < 24) {
-      carouselImg = "weatherImages/snow.png";
+      let iImage = "snowDay" + i + ".jpg";
+      carouselImg = "weatherImages/snow/" + iImage;
     } else if (icon >= 24 && icon < 30) {
-      carouselImg = "weatherImages/sleet.jpeg";
-    } else if ((icon = 32)) {
-      carouselImg = "weatherImages/windy.png";
+      let iImage = "sleetDay" + i + ".jpg";
+      carouselImg = "weatherImages/sleet/" + iImage;
+    } else if (icon == 32) {
+      let iImage = "windyDay" + i + ".jpg";
+      carouselImg = "weatherImages/windy/" + iImage;
     } else if (icon >= 30) {
-      carouselImg = "weatherImages/whoKnows.jpeg";
-      console.log(icon);
+      let iImage = "whoKnowsDay" + i + ".jpg";
+      carouselImg = "weatherImages/whoKnows/" + iImage;
     }
     return carouselImg;
   }
@@ -51,7 +56,7 @@ $(() => {
       let pictureNum = parseInt(stringNum);
       //determine what the next picture number is.  If picture number is 5 then reset to the beginning of carousel at 1
       let newPictureNum = 1;
-      if (pictureNum == 5) {
+      if (pictureNum == numImages) {
       } else {
         newPictureNum = pictureNum + 1;
       }
@@ -101,7 +106,7 @@ $(() => {
       //when getting api call values
       //when using hardcoded...handleData has no parms
       let date = "2019-10-15";
-      let icon = 13;
+      let icon = 32;
       let iconPhrase = "Partly Cloudy";
       let tempMinValue = 47;
       let tempMaxValue = 63;
