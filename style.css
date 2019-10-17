@@ -1,20 +1,21 @@
-body {
-  background-color: grey;
+@media (min-width: 600px) {
+  body {
+    background-color: grey;
+  }
 }
 
 .flex-container {
   display: flex;
   flex: 1;
 }
-/**/
 .flex-logo {
   margin-left: 100px;
-  height: 200px;
-  width: 200px;
+  height: 100px;
+  width: 100px;
 }
 .flex-about {
   margin-left: 50px;
-  height: 200px;
+  height: 100px;
   width: 600px;
   margin-right: 100px;
 }
@@ -22,7 +23,7 @@ body {
 .flex1-container {
   display: flex;
   flex: 2;
-  margin-top: 10px;
+  margin-top: 1px;
 }
 .flex2-container {
   display: flex;
@@ -37,9 +38,4 @@ h1 {
   flex: 1;
   font-family: sans-serif;
   color: steelblue;
-}
-
-.flexWeather1 {
-  display: flex;
-  flex: 3;
 }
