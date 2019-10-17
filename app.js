@@ -18,14 +18,14 @@ $(() => {
     }
     return weatherImage;
   };
-  function getCarouselImg(ii, icon) {
+  function getCarouselImg(i, icon) {
     if (icon > 0 && icon < 4) {
       carouselImg = "weatherImages/sunny.jpg";
     } else if (icon >= 4 && icon < 12) {
       carouselImg = "weatherImages/cloudy.jpg";
     } else if (icon >= 12 && icon < 19) {
-      let iiImage = "rainyDay" + ii + ".jpg";
-      carouselImg = "weatherImages/rainy/" + iiImage;
+      let iImage = "rainyDay" + i + ".jpg";
+      carouselImg = "weatherImages/rainy/" + iImage;
     } else if (icon >= 19 && icon < 24) {
       carouselImg = "weatherImages/snow.png";
     } else if (icon >= 24 && icon < 30) {
@@ -91,7 +91,7 @@ $(() => {
   }
   const handleData = () => {
     // const handleData = data => {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 1; i < 6; i++) {
       //hardcoded values to be commented out after
       //when getting api call values
       //when using hardcoded...handleData has no parms
@@ -138,47 +138,28 @@ $(() => {
       const $carouselDiv = $("<div>").attr("class", "carousel-images");
       $($flexWeather).append($carouselDiv);
       ///create images with class of ii to create carousel effect
-      for (let ii = 1; ii < 6; ii++) {
-        carouselImg = getCarouselImg(ii, icon);
-        const $imgSrc = $("<img>")
-          .attr("src", carouselImg)
-          .attr("class", "carousel-image");
-        // .attr("class", ii);
-        $($carouselDiv).append($imgSrc);
-        ///initialize to  1st image displays
-        if (ii == 1) {
-          $imgSrc.css("display", "block");
-        } else {
-          $imgSrc.css("display", "none");
-        }
-        //////////////////////////////////////////////////
-        //     let highestIndex = $('.carousel-images').children().length - 1;
-        //     // next button
-        //     let currentImgIndex = 0;
-        // $('.next').on('click', () => {
-        //     // hide current image
-        //     $('.carousel-images').children().eq(currentImgIndex).css('display', 'none');
-        //     // increment image index
-        //     if (currentImgIndex < highestIndex) {
-        //         currentImgIndex++;
-        //     }
-        //     else {
-        //         currentImgIndex = 0;
-        //     }
+      carouselImg = getCarouselImg(i, icon);
+      const $imgSrc = $("<img>")
+        .attr("src", carouselImg)
+        .attr("class", "carousel-image");
+      // .attr("class", ii);
+      $($carouselDiv).append($imgSrc);
+      ///initialize to  1st image displays
+      ///////////////////////////////////////////////////////
+      //create carousel images approach 2 - create 1 image per div
+      //cascading the image number so same image won't appear on different divs if
+      //the weather condition changes - carousel will replace image
 
-        //     // show current image
-        //     $('.carousel-images').children().eq(currentImgIndex).css('display', 'block');
-        // })
-        ////////////////////////////////////////////////////////
-      }
+      //////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////
     }
     let carouselIndex = 0;
     let highestIndex = 4;
     alert("set interval");
-    let myvar = setInterval(
-      carouselFunction(carouselIndex, highestIndex),
-      3000
-    );
+    // let myvar = setInterval(
+    // carouselFunction(carouselIndex, highestIndex),
+    //   3000
+    // );
   };
 
   ///////to handle data when hardcoded values are used for testing
