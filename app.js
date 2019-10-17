@@ -55,7 +55,7 @@ $(() => {
       let stringNum = currentImage.charAt(currentIndex);
       let pictureNum = parseInt(stringNum);
       //determine what the next picture number is.  If picture number is 5 then reset to the beginning of carousel at 1
-      let newPictureNum = 1;
+      let newPictureNum = 0;
       if (pictureNum == numImages) {
       } else {
         newPictureNum = pictureNum + 1;
@@ -99,24 +99,26 @@ $(() => {
       blanketMsg;
     return weatherMsg;
   }
-  const handleData = () => {
-    // const handleData = data => {
-    for (let i = 1; i < 6; i++) {
+  // const handleData = () => {
+  const handleData = data => {
+    console.log("enter handle data");
+    for (let i = 0; i < 5; i++) {
+      console.log(data);
       //hardcoded values to be commented out after
       //when getting api call values
       //when using hardcoded...handleData has no parms
-      let date = "2019-10-15";
-      let icon = 32;
-      let iconPhrase = "Partly Cloudy";
-      let tempMinValue = 47;
-      let tempMaxValue = 63;
+      // let date = "2019-10-15";
+      // let icon = 32;
+      // let iconPhrase = "Partly Cloudy";
+      // let tempMinValue = 47;
+      // let tempMaxValue = 63;
       ///Format data/////////////////////////////
-      // date = date.slice(0, 10);
-      // const icon = data.DailyForecasts[i].Day.Icon;
-      // let date = data.DailyForecasts[i].Date;
-      // const iconPhrase = data.DailyForecasts[i].Day.IconPhrase;
-      // const tempMinValue = data.DailyForecasts[i].Temperature.Minimum.Value;
-      // const tempMaxValue = data.DailyForecasts[i].Temperature.Maximum.Value;
+      const icon = data.DailyForecasts[i].Day.Icon;
+      let date = data.DailyForecasts[i].Date;
+      date = date.slice(0, 10);
+      const iconPhrase = data.DailyForecasts[i].Day.IconPhrase;
+      const tempMinValue = data.DailyForecasts[i].Temperature.Minimum.Value;
+      const tempMaxValue = data.DailyForecasts[i].Temperature.Maximum.Value;
       //create HTML object///////////////////////////////////////
       const $flexWeather = $("<div>").attr("class", "flexWeather");
       $("#flexWeather").append($flexWeather);
@@ -162,21 +164,35 @@ $(() => {
       //////////////////////////////////////////////////
       ////////////////////////////////////////////////////////
     }
-    let numImages = 5;
+    let numImages = 4;
+    console.log("before set interval");
     setInterval(() => carouselFunction(numImages), 3000);
   };
 
-  ///////to handle data when hardcoded values are used for testing
-  handleData();
+  const handleData2 = data2 => {
+    console.log("enter handleData2");
 
-  // const endpoint2 =
-  //   "http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ&q=06483";
-  // //Key; - locationKey
-  // $.ajax({ url: endpoint2 }).then(handleData2);
-  // const endpoint =
-  //   "http://dataservice.accuweather.com/forecasts/v1/daily/5day/2439_PC?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ";
-  // $.ajax({ url: endpoint }).then(handleData);
+    const locationKey = data2[0].Key;
+
+    console.log("2nd ajax call");
+    const endpoint = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ`;
+    $.ajax({ url: endpoint }).then(handleData);
+  };
+  //  2439_PC
+  $("form").on("click", "#submit", event => {
+    event.preventDefault(); // stops the page from being refreshed
+    const inputValue = $("#input-box").val();
+    ///////to handle data when hardcoded values are used for testing
+    // handleData();
+
+    // use zip input to get location keylocationKey
+    console.log("1st ajax call");
+
+    const endpoint2 = `http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ&q=${inputValue}`;
+    $.ajax({ url: endpoint2 }).then(handleData2);
+  });
 });
+
 //endpoint data layout
 // "DailyForecasts": [
 //     {
