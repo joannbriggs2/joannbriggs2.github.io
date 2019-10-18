@@ -43,11 +43,11 @@ $(() => {
     }
     return carouselImg;
   }
-  function carouselFunction(numImages) {
+  function carouselFunction(imgIndex) {
     console.log("carousel function");
 
     const $imageIndx = $(".carousel-image");
-    for (i = 0; i < numImages; i++) {
+    for (i = 0; i <= imgIndex; i++) {
       currentImage = $imageIndx[i].src;
       //get position of .jpg and then decrement by 1 to get the position of the picture number
       let currentIndex = currentImage.indexOf(".jpg");
@@ -56,11 +56,11 @@ $(() => {
       let pictureNum = parseInt(stringNum);
       //determine what the next picture number is.  If picture number is 5 then reset to the beginning of carousel at 1
       let newPictureNum = 0;
-      if (pictureNum == numImages) {
+      if (pictureNum == imgIndex) {
       } else {
         newPictureNum = pictureNum + 1;
       }
-      //when image scr retrieved it is coming back with HTTP which is causing
+      //when image src retrieved it is coming back with HTTP which is causing
       //the image to not be found,  Need to strip out everthing prior "weatherImages".
       console.log("current image " + currentImage);
       const stripIndex = currentImage.indexOf("weatherImages");
@@ -149,12 +149,10 @@ $(() => {
       //build carousel
       const $carouselDiv = $("<div>").attr("class", "carousel-images");
       $($flexWeather).append($carouselDiv);
-      ///create images with class of ii to create carousel effect
       carouselImg = getCarouselImg(i, icon);
       const $imgSrc = $("<img>")
         .attr("src", carouselImg)
         .attr("class", "carousel-image");
-      // .attr("class", ii);
       $($carouselDiv).append($imgSrc);
       ///initialize to  1st image displays
       ///////////////////////////////////////////////////////
@@ -164,9 +162,9 @@ $(() => {
       //////////////////////////////////////////////////
       ////////////////////////////////////////////////////////
     }
-    let numImages = 4;
+    let imgIndex = 4;
     console.log("before set interval");
-    setInterval(() => carouselFunction(numImages), 3000);
+    setInterval(() => carouselFunction(imgIndex), 3000);
   };
 
   const handleData2 = data2 => {
