@@ -74,18 +74,19 @@ $(() => {
     }
   }
   function getWeatherMsg(date, icon, iconPhrase, tempMinValue, tempMaxValue) {
-    let blanketMsg = "Who knows! when in doubt...blanket!";
+    let blanketMsg = "When in doubt...blanket!";
     if (tempMinValue > 40) {
       blanketMsg = "No blanket today!";
     } else if (tempMaxValue < 20) {
       blanketMsg = "a heavy weight blanket is recommended";
-    } else if (tempMinValue >= 20 && tempMaxValue <= 40) {
+    } else if (tempMinValue >= 20 && tempMaxValue > 40) {
       if (icon > 0 && icon < 12) {
-        blanketMsg = "a lightweight blanket is recommended";
+        blanketMsg = "No blanket today!";
       } else {
-        blanketMsg = "a heavyweight blanket is recommended";
+        blanketMsg = "a lightweight blanket is recommended";
       }
     }
+    console.log(icon, iconPhrase);
     const weatherMsg =
       "Your weather for " +
       date +
@@ -125,6 +126,18 @@ $(() => {
       $($flexWeather).css("display", "flex");
       $($flexWeather).css("flex", "3");
       $($flexWeather).css("margin-bottom", "10px");
+      $($flexWeather).css("align-items", "center");
+      $($flexWeather).css("justify-content", "space-around");
+
+      //build carousel
+      const $carouselDiv = $("<div>").attr("class", "carousel-images");
+      $($flexWeather).append($carouselDiv);
+      carouselImg = getCarouselImg(i, icon);
+      const $imgSrc = $("<img>")
+        .attr("src", carouselImg)
+        .attr("class", "carousel-image");
+      $($imgSrc).css("border-radius", "25px");
+      $($carouselDiv).append($imgSrc);
       // get emoji
       let weatherImage = getWeatherImage(icon);
       const $weatherImage = $("<img>").attr("src", weatherImage);
@@ -132,6 +145,8 @@ $(() => {
       // format the weather message
       $($weatherImage).css("width", "50px");
       $($weatherImage).css("height", "50px");
+      $($weatherImage).css("border-radius", "25px");
+
       let weatherMsg = getWeatherMsg(
         date,
         icon,
@@ -142,18 +157,17 @@ $(() => {
       // alert(weatherMsg);
       const $weatherMsg = $("<p>").text(weatherMsg);
       $($flexWeather).append($weatherMsg);
-      $($weatherMsg).css("height", "50px");
-      $($weatherMsg).css("width", "400px");
+      $($weatherMsg).css("height", "100px");
+      $($weatherMsg).css("width", "600px");
       $($weatherMsg).css("margin-left", "5px");
-      $($weatherMsg).css("padding-top", "0px");
-      //build carousel
-      const $carouselDiv = $("<div>").attr("class", "carousel-images");
-      $($flexWeather).append($carouselDiv);
-      carouselImg = getCarouselImg(i, icon);
-      const $imgSrc = $("<img>")
-        .attr("src", carouselImg)
-        .attr("class", "carousel-image");
-      $($carouselDiv).append($imgSrc);
+      $($weatherMsg).css("padding-top", "33px");
+      $($weatherMsg).css("padding-left", "10px");
+      $($weatherMsg).css("padding-right", "10px");
+      $($weatherMsg).css("font-family", "sans-serif");
+      $($weatherMsg).css("color", "white");
+      $($weatherMsg).css("background-color", "rgb(1, 84, 156)");
+      $($weatherMsg).css("border-radius", "25px");
+
       ///initialize to  1st image displays
       ///////////////////////////////////////////////////////
       //create carousel images approach 2 - create 1 image per div
@@ -163,16 +177,12 @@ $(() => {
       ////////////////////////////////////////////////////////
     }
     let imgIndex = 4;
-    console.log("before set interval");
     setInterval(() => carouselFunction(imgIndex), 3000);
   };
 
   const handleData2 = data2 => {
-    console.log("enter handleData2");
-
     const locationKey = data2[0].Key;
 
-    console.log("2nd ajax call");
     const endpoint = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ`;
     $.ajax({ url: endpoint }).then(handleData);
   };
@@ -184,8 +194,6 @@ $(() => {
     // handleData();
 
     // use zip input to get location keylocationKey
-    console.log("1st ajax call");
-
     const endpoint2 = `http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ&q=${inputValue}`;
     $.ajax({ url: endpoint2 }).then(handleData2);
   });
