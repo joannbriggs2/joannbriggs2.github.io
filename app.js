@@ -219,16 +219,6 @@ $(() => {
         .text(weatherMsg)
         .attr("class", "weatherMsg");
       $($flexWeather).append($weatherMsg);
-      // $($weatherMsg).css("margin-left", "5px");
-      // $($weatherMsg).css("width", "600px");
-      // $($weatherMsg).css("padding-top", "30x");
-      // $($weatherMsg).css("padding-left", "10px");
-      // $($weatherMsg).css("padding-right", "10px");
-      // $($weatherMsg).css("padding-right", "20px");
-      // $($weatherMsg).css("font-family", "sans-serif");
-      // $($weatherMsg).css("color", "white");
-      // $($weatherMsg).css("background-color", "rgb(1, 84, 156)");
-      // $($weatherMsg).css("border-radius", "25px");
 
       ///initialize to  1st image displays
       ///////////////////////////////////////////////////////
@@ -276,6 +266,6 @@ $(() => {
     // use zip input to get location keylocationKey
     const endpoint2 = `http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ&q=${inputValue}`;
     $.ajax({ url: endpoint2 }).then(handleData2);
-    // $(event).trigger("reset");
+    $("#input-box").val("");
   });
 });
