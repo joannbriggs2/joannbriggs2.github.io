@@ -2,7 +2,7 @@
 
 ### JavaScript JQuery CSS HTML
 
-## User is presented with Blue Steed Embroidery home page.
+## Blue Steed Embroidery home page.
 
 ### Section one displays the logo and mission statement.
 
@@ -10,7 +10,7 @@
 
 ### Section three contains contact information with links to Facebook and Instagram pages that open in a new window.
 
-### Section four allows the user to key in a zip code to get a 5 Day Blanket Watch which includes the weather forcast for that location and a gallery of pictures that change at a set interval.
+### Section four allows the user to key in a zip code to get a 5 Day Blanket Watch which includes the weather forcast for the location, a horse blanket recommendation and a gallery of pictures that change at a set interval.
 
 ## References
 
