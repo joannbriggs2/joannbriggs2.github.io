@@ -28,7 +28,7 @@
 
 ### API call using location key code and returning a weather icon and phrase, date and min/max temperatures
 
-### Logic to determine if horse blanketing is recommending or not based on the min/max temperation and a weather icon. Emoji displayed relative to weather icon. Displays a product gallery relative to the icon at set interval
+### Logic to determine if horse blanketing is recommending or not based on the min/max temperature and a weather icon. Emoji displayed relative to weather icon. Displays a product gallery relative to the icon at set interval
 
 ## References
 
