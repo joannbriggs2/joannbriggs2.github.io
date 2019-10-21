@@ -18,19 +18,19 @@
 
 ### Section four prompts the user for a zip code, returning a 5 Day Blanket Watch which includes the weather forcast and a gallery of products.
 
-## Key Functions
+## Key Functions:
 
 ### Carousel images using previous/next buttons
 
 ### NAV bar images that open new window
 
-### API call using input value and returning location key code and location name
+### API call using input value, returning location key code and location name
 
 ### API call using location key code and returning a weather icon and phrase, date and min/max temperatures
 
 ### Logic to determine if horse blanketing is recommending or not based on the min/max temperature and a weather icon. Emoji displayed relative to weather icon. Displays a product gallery relative to the icon at set interval
 
-## References
+## References:
 
 ### W3 Schools: https://www.w3schools.com
 
