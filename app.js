@@ -1,4 +1,61 @@
+// Display 3 images
+// hide first current image
+// second current image becomes first.
+//  third current image becomes second
+//  add next thirst image
+//
 $(() => {
+  let city = "";
+  let startIndex = 1;
+  let midIndex = 2;
+  let endIndex = 3;
+
+  function nextCarousel() {
+    let highestIndex = $(".flex-main-images").children().length - 2;
+    const mainImage = $(".flex-main-images").children();
+    $(".flex-main-images")
+      .children()
+      .eq(startIndex)
+      .css("display", "none");
+    // increment image indexes
+
+    startIndex = midIndex;
+    midIndex = endIndex;
+    if (endIndex < highestIndex) {
+      endIndex++;
+    } else {
+      endIndex = 1;
+    }
+    // show current image
+    $(".flex-main-images")
+      .children()
+      .eq(endIndex)
+      .css("display", "block");
+  }
+
+  function previousCarousel() {
+    highestIndex = $(".flex-main-images").children().length - 2;
+    const mainImage = $(".flex-main-images").children();
+    $(".flex-main-images")
+      .children()
+      .eq(endIndex)
+      .css("display", "none");
+    // increment image indexes
+
+    endIndex = midIndex;
+    midIndex = startIndex;
+    if (startIndex > 1) {
+      startIndex--;
+    } else {
+      startIndex = highestIndex;
+    }
+    // show current image
+    $(".flex-main-images")
+      .children()
+      .eq(startIndex)
+      .css("display", "block");
+  }
+
   const getWeatherImage = icon => {
     if (icon > 0 && icon < 4) {
       weatherImage = "weatherImages/sunny/sunny.jpeg";
@@ -14,7 +71,6 @@ $(() => {
       weatherImage = "weatherImages/windy/windy.png";
     } else if (icon >= 30) {
       weatherImage = "weatherImages/whoKnows/whoKnows.jpeg";
-      console.log(icon);
     }
     return weatherImage;
   };
@@ -44,8 +100,6 @@ $(() => {
     return carouselImg;
   }
   function carouselFunction(imgIndex) {
-    console.log("carousel function");
-
     const $imageIndx = $(".carousel-image");
     for (i = 0; i <= imgIndex; i++) {
       currentImage = $imageIndx[i].src;
@@ -62,18 +116,21 @@ $(() => {
       }
       //when image src retrieved it is coming back with HTTP which is causing
       //the image to not be found,  Need to strip out everthing prior "weatherImages".
-      console.log("current image " + currentImage);
       const stripIndex = currentImage.indexOf("weatherImages");
-      console.log("strip index " + stripIndex);
       const strippedImage = currentImage.substring(stripIndex);
-      console.log("stripped image " + strippedImage);
       const newImage = strippedImage.replace(pictureNum, newPictureNum);
-      console.log("new image" + newImage);
 
       $imageIndx.eq(i).attr("src", newImage);
     }
   }
-  function getWeatherMsg(date, icon, iconPhrase, tempMinValue, tempMaxValue) {
+  function getWeatherMsg(
+    date,
+    icon,
+    iconPhrase,
+    tempMinValue,
+    tempMaxValue,
+    city
+  ) {
     let blanketMsg = "When in doubt...blanket!";
     if (tempMinValue > 40) {
       blanketMsg = "No blanket today!";
@@ -86,9 +143,11 @@ $(() => {
         blanketMsg = "a lightweight blanket is recommended";
       }
     }
-    console.log(icon, iconPhrase);
+    // console.log(icon, iconPhrase, location);
     const weatherMsg =
       "Your weather for " +
+      city +
+      " for " +
       date +
       " is " +
       iconPhrase +
@@ -104,7 +163,7 @@ $(() => {
   const handleData = data => {
     console.log("enter handle data");
     for (let i = 0; i < 5; i++) {
-      console.log(data);
+      // console.log(data);
       //hardcoded values to be commented out after
       //when getting api call values
       //when using hardcoded...handleData has no parms
@@ -146,27 +205,30 @@ $(() => {
       $($weatherImage).css("width", "50px");
       $($weatherImage).css("height", "50px");
       $($weatherImage).css("border-radius", "25px");
-
+      console.log(location);
       let weatherMsg = getWeatherMsg(
         date,
         icon,
         iconPhrase,
         tempMinValue,
-        tempMaxValue
+        tempMaxValue,
+        city
       );
       // alert(weatherMsg);
-      const $weatherMsg = $("<p>").text(weatherMsg);
+      const $weatherMsg = $("<p>")
+        .text(weatherMsg)
+        .attr("class", "weatherMsg");
       $($flexWeather).append($weatherMsg);
-      $($weatherMsg).css("height", "100px");
-      $($weatherMsg).css("width", "600px");
-      $($weatherMsg).css("margin-left", "5px");
-      $($weatherMsg).css("padding-top", "33px");
-      $($weatherMsg).css("padding-left", "10px");
-      $($weatherMsg).css("padding-right", "10px");
-      $($weatherMsg).css("font-family", "sans-serif");
-      $($weatherMsg).css("color", "white");
-      $($weatherMsg).css("background-color", "rgb(1, 84, 156)");
-      $($weatherMsg).css("border-radius", "25px");
+      // $($weatherMsg).css("margin-left", "5px");
+      // $($weatherMsg).css("width", "600px");
+      // $($weatherMsg).css("padding-top", "30x");
+      // $($weatherMsg).css("padding-left", "10px");
+      // $($weatherMsg).css("padding-right", "10px");
+      // $($weatherMsg).css("padding-right", "20px");
+      // $($weatherMsg).css("font-family", "sans-serif");
+      // $($weatherMsg).css("color", "white");
+      // $($weatherMsg).css("background-color", "rgb(1, 84, 156)");
+      // $($weatherMsg).css("border-radius", "25px");
 
       ///initialize to  1st image displays
       ///////////////////////////////////////////////////////
@@ -181,12 +243,30 @@ $(() => {
   };
 
   const handleData2 = data2 => {
-    const locationKey = data2[0].Key;
+    console.log(data2);
+    const length = data2.length;
+    if (length == 0) {
+      alert("Zip Code is Invalied");
+      return;
+    }
 
+    const locationKey = data2[0].Key;
+    city = data2[0].LocalizedName;
+    // console.log(location);
     const endpoint = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ`;
     $.ajax({ url: endpoint }).then(handleData);
   };
-  //  2439_PC
+
+  $(".next").on("click", () => {
+    console.log("on click");
+    nextCarousel();
+  });
+
+  $(".previous").on("click", () => {
+    console.log("on click");
+    previousCarousel();
+  });
+
   $("form").on("click", "#submit", event => {
     event.preventDefault(); // stops the page from being refreshed
     const inputValue = $("#input-box").val();
@@ -196,23 +276,6 @@ $(() => {
     // use zip input to get location keylocationKey
     const endpoint2 = `http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ&q=${inputValue}`;
     $.ajax({ url: endpoint2 }).then(handleData2);
+    // $(event).trigger("reset");
   });
 });
-
-//endpoint data layout
-// "DailyForecasts": [
-//     {
-//       "Date": "2019-10-15T07:00:00-04:00",
-//       "EpochDate": 1571137200,
-//       "Temperature": {
-//         "Minimum": {
-//           "Value": 47,
-//           "Unit": "F",
-//           "UnitType": 18
-//         },
-//         "Maximum": {
-//           "Value": 63,
-//           "Unit": "F",
-//           "UnitType": 18
-//         }
-//       },
