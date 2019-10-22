@@ -23,17 +23,7 @@ body {
   /* margin-left: 20px; */
   margin-top: 10px;
   height: 100px;
-  width: 800px;
-}
-@media (max-width: 375px) {
-  .flex-main {
-    margin-bottom: 20px;
-    margin-top: -40px;
-  }
-  .flex-about {
-    margin-bottom: 20px;
-    margin-top: -40px;
-  }
+  /* width: 800px; */
 }
 .flex-main-images img:nth-of-type(1n + 4) {
   display: none;
@@ -111,13 +101,31 @@ body {
 }
 
 #next {
-  bottom: 400px;
+  bottom: 350px;
   right: 16px;
 }
 #prev {
-  bottom: 400px;
+  bottom: 350px;
   left: 16px;
 }
 .carousel-button:hover {
   cursor: pointer;
+}
+@media (max-width: 375px) {
+  .flex-main {
+    margin-bottom: 20px;
+    margin-top: -40px;
+  }
+  .flex-about {
+    margin-bottom: 20px;
+    margin-top: -40px;
+  }
+  #next {
+    bottom: 350px;
+    right: 16px;
+  }
+  #prev {
+    bottom: 350px;
+    left: 16px;
+  }
 }
