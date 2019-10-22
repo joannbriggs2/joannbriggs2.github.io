@@ -1,4 +1,4 @@
-@media (min-width: 600px) {
+@media (min-width: 375px) {
 }
 body {
   background-color: grey;
@@ -7,32 +7,32 @@ body {
   display: flex;
   flex: 2;
   margin-bottom: 5px;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   color: white;
   font-family: sans-serif;
   background-color: rgb(1, 84, 156);
 }
 .flex-logo {
-  height: 250px;
-  width: 250px;
+  height: 200px;
+  width: 200px;
 }
 .flex-about {
   /* justify-content: center; */
-  font-size: larger;
-  margin-left: 20px;
+  /* font-size: larger; */
+  /* margin-left: 20px; */
   margin-top: 10px;
   height: 100px;
   width: 800px;
 }
-@media (max-width: 700px) {
+@media (max-width: 375px) {
   .flex-main {
     margin-bottom: 20px;
-    margin-top: -20px;
+    margin-top: -40px;
   }
   .flex-about {
     margin-bottom: 20px;
-    margin-top: -20px;
+    margin-top: -40px;
   }
 }
 .flex-main-images img:nth-of-type(1n + 4) {

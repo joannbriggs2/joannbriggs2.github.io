@@ -182,7 +182,7 @@ $(() => {
       $($flexWeather).css("flex", "3");
       $($flexWeather).css("margin-bottom", "10px");
       $($flexWeather).css("align-items", "center");
-      $($flexWeather).css("justify-content", "center");
+      $($flexWeather).css("justify-content", "space-ar");
       $($flexWeather).css("background-color", "rgb(1, 84, 156)");
       //build carousel
       const $carouselDiv = $("<div>").attr("class", "carousel-images");
@@ -201,7 +201,6 @@ $(() => {
       // format the weather message
       $($weatherImage).css("width", "60px");
       $($weatherImage).css("height", "60px");
-      $($weatherImage).css("margin-left", "30px");
       $($weatherImage).css("border-radius", "25px");
       let weatherMsg = getWeatherMsg(
         date,
@@ -216,7 +215,6 @@ $(() => {
         .attr("class", "weatherMsg");
       $($flexWeather).append($weatherMsg);
       $($weatherMsg).css("width", "600px");
-      $($weatherMsg).css("margin-left", "30px");
       $($weatherMsg).css("padding-top", "30px");
       $($weatherMsg).css("padding-right", "10px");
       $($weatherMsg).css("padding-bottom", "20px");
