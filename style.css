@@ -1,5 +1,5 @@
-@media (min-width: 375px) {
-}
+/* @media (min-width: 375px) { */
+/* } */
 body {
   background-color: grey;
 }
@@ -19,7 +19,7 @@ body {
 }
 .flex-about {
   /* justify-content: center; */
-  /* font-size: larger; */
+  font-size: larger;
   /* margin-left: 20px; */
   margin-top: 10px;
   height: 100px;
