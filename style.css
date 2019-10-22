@@ -109,7 +109,7 @@ body {
 .carousel-button:hover {
   cursor: pointer;
 }
-@media (max-width: 375px) {
+@media (max-width: 374px) {
   .flex-logo {
     height: 150px;
     width: 150px;
@@ -141,7 +141,7 @@ body {
     display: none;
   }
 }
-@media (min-width: 375px) {
+@media (min-width: 374px) {
   .flex-about {
     /* justify-content: center; */
     font-size: larger;
