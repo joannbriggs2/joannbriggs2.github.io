@@ -109,11 +109,11 @@ body {
 }
 
 #next {
-  bottom: 240px;
+  bottom: 286px;
   right: 16px;
 }
 #prev {
-  bottom: 240px;
+  bottom: 286px;
   left: 16px;
 }
 .carousel-button:hover {
