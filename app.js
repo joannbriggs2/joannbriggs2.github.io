@@ -183,6 +183,7 @@ $(() => {
       $($flexWeather).css("margin-bottom", "10px");
       $($flexWeather).css("align-items", "center");
       $($flexWeather).css("justify-content", "space-around");
+      $($flexWeather).css("background-color", "rgb(1, 84, 156)");
       //build carousel
       const $carouselDiv = $("<div>").attr("class", "carousel-images");
       $($flexWeather).append($carouselDiv);
@@ -191,14 +192,15 @@ $(() => {
         .attr("src", carouselImg)
         .attr("class", "carousel-image");
       $($imgSrc).css("border-radius", "25px");
+      $($imgSrc).css("padding-top", "5px");
       $($carouselDiv).append($imgSrc);
       // get emoji
       let weatherImage = getWeatherImage(icon);
       const $weatherImage = $("<img>").attr("src", weatherImage);
       $($flexWeather).append($weatherImage);
       // format the weather message
-      $($weatherImage).css("width", "50px");
-      $($weatherImage).css("height", "50px");
+      $($weatherImage).css("width", "60px");
+      $($weatherImage).css("height", "60px");
       $($weatherImage).css("border-radius", "25px");
       let weatherMsg = getWeatherMsg(
         date,

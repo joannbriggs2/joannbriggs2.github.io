@@ -95,8 +95,8 @@ body {
   padding-bottom: 20px;
   font-family: sans-serif;
   color: white;
-  background-color: rgb(1, 84, 156);
-  border-radius: 25px;
+  /* background-color: rgb(1, 84, 156); */
+  /* border-radius: 25px; */
 }
 
 .carousel-button {
@@ -109,11 +109,11 @@ body {
 }
 
 #next {
-  bottom: 284px;
+  bottom: 240px;
   right: 16px;
 }
 #prev {
-  bottom: 284px;
+  bottom: 240px;
   left: 16px;
 }
 .carousel-button:hover {
