@@ -111,11 +111,11 @@ body {
 }
 
 #next {
-  bottom: 300px;
+  bottom: 350px;
   right: 16px;
 }
 #prev {
-  bottom: 300px;
+  bottom: 350px;
   left: 16px;
 }
 .carousel-button:hover {
