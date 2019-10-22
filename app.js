@@ -196,12 +196,14 @@ $(() => {
       $($carouselDiv).append($imgSrc);
       // get emoji
       let weatherImage = getWeatherImage(icon);
-      const $weatherImage = $("<img>").attr("src", weatherImage);
+      const $weatherImage = $("<img>")
+        .attr("src", weatherImage)
+        .attr("class", "weatherImg");
       $($flexWeather).append($weatherImage);
-      // format the weather message
       $($weatherImage).css("width", "60px");
       $($weatherImage).css("height", "60px");
       $($weatherImage).css("border-radius", "25px");
+      // format the weather message
       let weatherMsg = getWeatherMsg(
         date,
         icon,

@@ -112,20 +112,34 @@ body {
   cursor: pointer;
 }
 @media (max-width: 375px) {
+  .flex-logo {
+    height: 150px;
+    width: 150px;
+  }
   .flex-main {
     margin-bottom: 20px;
-    margin-top: -40px;
+    margin-top: -20px;
   }
   .flex-about {
-    margin-bottom: 20px;
-    margin-top: -40px;
+    font-size: small;
+    margin-bottom: 10px;
+    margin-top: -10px;
   }
   #next {
-    bottom: 200px;
+    bottom: 450px;
     right: 16px;
   }
   #prev {
-    bottom: 200px;
+    bottom: 450px;
     left: 16px;
+  }
+
+  .carousel-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .weatherImg {
+    display: none;
   }
 }
