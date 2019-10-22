@@ -14,8 +14,8 @@ body {
   background-color: rgb(1, 84, 156);
 }
 .flex-logo {
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
 }
 .flex-about {
   justify-content: center;
@@ -110,11 +110,11 @@ body {
 }
 
 #next {
-  bottom: 400px;
+  bottom: 350px;
   right: 16px;
 }
 #prev {
-  bottom: 400px;
+  bottom: 350px;
   left: 16px;
 }
 .carousel-button:hover {
