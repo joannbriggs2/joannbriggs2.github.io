@@ -88,7 +88,7 @@ body {
   background-color: goldenrod;
   margin-left: 10px;
 }
-.weatherMsg {
+/* .weatherMsg {
   width: 600px;
   margin-left: 5px;
   padding-top: 30px;
@@ -96,7 +96,7 @@ body {
   padding-right: 10px;
   padding-bottom: 20px;
   font-family: sans-serif;
-  color: white;
+  color: white; */
   /* background-color: rgb(1, 84, 156); */
   /* border-radius: 25px; */
 }
@@ -111,11 +111,11 @@ body {
 }
 
 #next {
-  bottom: 350px;
+  bottom: 300px;
   right: 16px;
 }
 #prev {
-  bottom: 350px;
+  bottom: 300px;
   left: 16px;
 }
 .carousel-button:hover {
