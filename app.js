@@ -1,24 +1,17 @@
-// Display 3 images
-// hide first current image
-// second current image becomes first.
-//  third current image becomes second
-//  add next thirst image
-//
 $(() => {
+  //initialize global variables
   let city = "";
   let startIndex = 1;
   let midIndex = 2;
   let endIndex = 3;
-
+  //MAIN CAROUSEL///////////////////////////////////////////////
   function nextCarousel() {
     let highestIndex = $(".flex-main-images").children().length - 2;
-    const mainImage = $(".flex-main-images").children();
     $(".flex-main-images")
       .children()
       .eq(startIndex)
       .css("display", "none");
     // increment image indexes
-
     startIndex = midIndex;
     midIndex = endIndex;
     if (endIndex < highestIndex) {
@@ -35,7 +28,6 @@ $(() => {
 
   function previousCarousel() {
     highestIndex = $(".flex-main-images").children().length - 2;
-    const mainImage = $(".flex-main-images").children();
     $(".flex-main-images")
       .children()
       .eq(endIndex)
@@ -55,7 +47,8 @@ $(() => {
       .eq(startIndex)
       .css("display", "block");
   }
-
+  ////////////////////////////////////////////////////////////////
+  //CONSTRUCT WEATHER SECTION
   const getWeatherImage = icon => {
     if (icon > 0 && icon < 4) {
       weatherImage = "weatherImages/sunny/sunny.jpeg";
@@ -99,6 +92,54 @@ $(() => {
     }
     return carouselImg;
   }
+  function getWeatherMsg(
+    date,
+    icon,
+    iconPhrase,
+    tempMinValue,
+    tempMaxValue,
+    city
+  ) {
+    let blanketMsg = "When in doubt...blanket!";
+    if (tempMinValue > 40) {
+      blanketMsg = "No blanket today!";
+    } else if (tempMaxValue < 20) {
+      blanketMsg = "a heavy weight blanket is recommended";
+    } else if (tempMinValue >= 20 && tempMaxValue > 40) {
+      if (icon > 0 && icon < 12) {
+        blanketMsg = "No blanket today!";
+      }
+    } else if (tempMinValue >= 20 && tempMaxValue <= 40) {
+      if (icon > 0 && icon < 12) {
+        blanketMsg = "a medium weight blanket is recommended";
+      } else {
+        blanketMsg = "a heavy weight blanket is recommended";
+      }
+    } else if (tempMinValue < 20 && tempMaxValue <= 40) {
+      if (icon > 0 && icon < 12) {
+        blanketMsg = "a medium weight blanket is recommended";
+      } else {
+        blanketMsg = "a heavy weight blanket is recommended";
+      }
+    }
+
+    const weatherMsg =
+      "Your weather for " +
+      city +
+      " for " +
+      date +
+      " is " +
+      iconPhrase +
+      " with temperatures between " +
+      tempMinValue +
+      " degrees and " +
+      tempMaxValue +
+      " degrees. " +
+      blanketMsg;
+    return weatherMsg;
+  }
+  ///////////////////////////////////////////////////////////////
+  //WEATHER CAROUSEL
   function carouselFunction(imgIndex) {
     const $imageIndx = $(".carousel-image");
     for (i = 0; i <= imgIndex; i++) {
@@ -123,55 +164,10 @@ $(() => {
       $imageIndx.eq(i).attr("src", newImage);
     }
   }
-  function getWeatherMsg(
-    date,
-    icon,
-    iconPhrase,
-    tempMinValue,
-    tempMaxValue,
-    city
-  ) {
-    let blanketMsg = "When in doubt...blanket!";
-    if (tempMinValue > 40) {
-      blanketMsg = "No blanket today!";
-    } else if (tempMaxValue < 20) {
-      blanketMsg = "a heavy weight blanket is recommended";
-    } else if (tempMinValue >= 20 && tempMaxValue > 40) {
-      if (icon > 0 && icon < 12) {
-        blanketMsg = "No blanket today!";
-      } else {
-        blanketMsg = "a lightweight blanket is recommended";
-      }
-    }
-    // console.log(icon, iconPhrase, location);
-    const weatherMsg =
-      "Your weather for " +
-      city +
-      " for " +
-      date +
-      " is " +
-      iconPhrase +
-      " with temperatures between " +
-      tempMinValue +
-      " degrees and " +
-      tempMaxValue +
-      " degrees. " +
-      blanketMsg;
-    return weatherMsg;
-  }
-  // const handleData = () => {
+  ///////////////////////////////////////////////////////////////
+  //HANDLE WEATHER
   const handleData = data => {
-    console.log("enter handle data");
     for (let i = 0; i < 5; i++) {
-      // console.log(data);
-      //hardcoded values to be commented out after
-      //when getting api call values
-      //when using hardcoded...handleData has no parms
-      // let date = "2019-10-15";
-      // let icon = 32;
-      // let iconPhrase = "Partly Cloudy";
-      // let tempMinValue = 47;
-      // let tempMaxValue = 63;
       ///Format data/////////////////////////////
       const icon = data.DailyForecasts[i].Day.Icon;
       let date = data.DailyForecasts[i].Date;
@@ -187,7 +183,6 @@ $(() => {
       $($flexWeather).css("margin-bottom", "10px");
       $($flexWeather).css("align-items", "center");
       $($flexWeather).css("justify-content", "space-around");
-
       //build carousel
       const $carouselDiv = $("<div>").attr("class", "carousel-images");
       $($flexWeather).append($carouselDiv);
@@ -205,7 +200,6 @@ $(() => {
       $($weatherImage).css("width", "50px");
       $($weatherImage).css("height", "50px");
       $($weatherImage).css("border-radius", "25px");
-      console.log(location);
       let weatherMsg = getWeatherMsg(
         date,
         icon,
@@ -214,13 +208,10 @@ $(() => {
         tempMaxValue,
         city
       );
-      // alert(weatherMsg);
       const $weatherMsg = $("<p>")
         .text(weatherMsg)
         .attr("class", "weatherMsg");
       $($flexWeather).append($weatherMsg);
-
-      ///initialize to  1st image displays
       ///////////////////////////////////////////////////////
       //create carousel images approach 2 - create 1 image per div
       //cascading the image number so same image won't appear on different divs if
@@ -231,39 +222,34 @@ $(() => {
     let imgIndex = 4;
     setInterval(() => carouselFunction(imgIndex), 3000);
   };
-
+  ////////////////////////////////////////////////////////////
+  //HANDLE ZIP CODE
   const handleData2 = data2 => {
-    console.log(data2);
     const length = data2.length;
     if (length == 0) {
       alert("Zip Code is Invalied");
       return;
     }
-
+    //Use location key to get weather forcast
     const locationKey = data2[0].Key;
     city = data2[0].LocalizedName;
-    // console.log(location);
     const endpoint = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ`;
     $.ajax({ url: endpoint }).then(handleData);
   };
-
+  /////////////////////////////////////////////////////////////
+  //MAIN
   $(".next").on("click", () => {
-    console.log("on click");
     nextCarousel();
   });
 
   $(".previous").on("click", () => {
-    console.log("on click");
     previousCarousel();
   });
 
   $("form").on("click", "#submit", event => {
     event.preventDefault(); // stops the page from being refreshed
     const inputValue = $("#input-box").val();
-    ///////to handle data when hardcoded values are used for testing
-    // handleData();
-
-    // use zip input to get location keylocationKey
+    // zip input to get location keylocationKey
     const endpoint2 = `http://dataservice.accuweather.com/locations/v1/postalcodes/search?apikey=xrwNm8rSHhO5oGzbxzSLF7L6wTw8gubZ&q=${inputValue}`;
     $.ajax({ url: endpoint2 }).then(handleData2);
     $("#input-box").val("");

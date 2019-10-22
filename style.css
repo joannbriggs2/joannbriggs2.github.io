@@ -100,12 +100,21 @@ body {
 }
 
 .carousel-button {
-  height: 6px;
-  width: 6px;
+  position: absolute;
   align-self: center;
+  background: rgb(1, 84, 156);
   color: white;
-  padding: 10px;
+  padding: 4px;
   border-radius: 50%;
+}
+
+#next {
+  bottom: 284px;
+  right: 16px;
+}
+#prev {
+  bottom: 284px;
+  left: 16px;
 }
 .carousel-button:hover {
   cursor: pointer;
