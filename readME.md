@@ -22,7 +22,9 @@
 
 ### Carousel images using previous/next buttons
 
-### NAV bar images that open new window
+### Carousel images using set interval
+
+### NAV bar images
 
 ### API call using input value, returning location key code and location name
 
@@ -37,3 +39,5 @@
 ### AccuWeather API Postal Code search: https://developer.accuweather.com/accuweather-locations-api/apis/get/locations/v1/postalcodes/search
 
 ### AccuWeather API 5 Days of Daily Forcasts: https://developer.accuweather.com/accuweather-forecast-api/apis/get/forecasts/v1/daily/5day/%7BlocationKey%7D
+
+### PNGGURU: https://www.pngguru.com
