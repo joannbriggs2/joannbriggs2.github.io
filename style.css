@@ -121,11 +121,11 @@ body {
     margin-top: -40px;
   }
   #next {
-    bottom: 350px;
+    bottom: 200px;
     right: 16px;
   }
   #prev {
-    bottom: 350px;
+    bottom: 200px;
     left: 16px;
   }
 }
