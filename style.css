@@ -7,7 +7,7 @@ body {
   display: flex;
   flex: 2;
   margin-bottom: 5px;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   color: white;
   font-family: sans-serif;
@@ -18,9 +18,10 @@ body {
   width: 250px;
 }
 .flex-about {
-  justify-content: center;
+  /* justify-content: center; */
   font-size: larger;
-  margin-top: 40px;
+  margin-left: 20px;
+  margin-top: 10px;
   height: 100px;
   width: 800px;
 }
